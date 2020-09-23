@@ -76,7 +76,7 @@ public class TrackFragment extends Fragment {
         MenuItem search = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) search.getActionView();
         searchView.setQueryHint("Search Track");
-//        searchView.isIconfiedByDefault();
+        searchView.setIconified(false);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
