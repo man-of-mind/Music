@@ -1,12 +1,19 @@
 package com.example.music;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
-import android.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,7 +24,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+//        toolbar.setTitle(getResources().getString(R.string.app_name));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         SimpleFragmentAdapter adapter = new SimpleFragmentAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(adapter);
@@ -35,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < imageResId.length; i++){
             mTabLayout.getTabAt(i).setIcon(imageResId[i]);
-            mTabLayout.getTabAt(i).setTabLabelVisibility(TabLayout.TAB_LABEL_VISIBILITY_UNLABELED);
+            if( i != 0) {
+                mTabLayout.getTabAt(i).setTabLabelVisibility(TabLayout.TAB_LABEL_VISIBILITY_UNLABELED);
+            }
         }
 
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -55,4 +68,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
