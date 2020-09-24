@@ -29,4 +29,5 @@
     <string name="hello_world">Hello Square World!</string>
     <string name="title_activity_search">SearchActivity</string>
     <string name="search">Search</string>
+    <string name="error_data_message">Hmmm.....seems something is wrong.</string>
 </resources>

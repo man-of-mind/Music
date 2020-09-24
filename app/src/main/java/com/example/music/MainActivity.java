@@ -3,14 +3,8 @@ package com.example.music;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
-
-import android.app.SearchManager;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.widget.SearchView;
-import android.widget.TextView;
+
 
 import com.google.android.material.tabs.TabLayout;
 

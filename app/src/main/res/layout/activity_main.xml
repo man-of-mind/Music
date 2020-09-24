@@ -42,12 +42,6 @@
         android:background="?attr/colorPrimary"
         android:theme="@style/ToolbarTheme"
         app:layout_scrollFlags="scroll|enterAlways" >
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:background="@drawable/search_background" />
     </androidx.appcompat.widget.Toolbar>
 
 <!--        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
