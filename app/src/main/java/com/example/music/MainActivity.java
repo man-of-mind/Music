@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
+import android.view.View;
 
 
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -18,11 +21,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        final Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
 //        toolbar.setTitle(getResources().getString(R.string.app_name));
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setHideOnContentScrollEnabled(true);
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         SimpleFragmentAdapter adapter = new SimpleFragmentAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(adapter);
@@ -49,16 +53,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 tab.setTabLabelVisibility(TabLayout.TAB_LABEL_VISIBILITY_LABELED);
+                int tabPosition = tab.getPosition();
+                if (tabPosition == 4) {
+                    toolbar.setVisibility(View.GONE);
+                }
+                else toolbar.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 tab.setTabLabelVisibility(TabLayout.TAB_LABEL_VISIBILITY_UNLABELED);
+                int tabPosition = tab.getPosition();
+                if(tabPosition != 4)
+                    toolbar.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
     }

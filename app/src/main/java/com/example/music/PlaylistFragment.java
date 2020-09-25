@@ -66,7 +66,7 @@ public class PlaylistFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_playlist, container, false);
+        return inflater.inflate(R.layout.fragment_track, container, false);
     }
 
     @Override

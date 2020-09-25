@@ -66,7 +66,7 @@ public class AlbumFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_album, container, false);
+        return inflater.inflate(R.layout.fragment_track, container, false);
     }
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
