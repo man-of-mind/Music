@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,6 +71,16 @@ public class ArtistFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView =  inflater.inflate(R.layout.fragment_track, container, false);
 
+        RecyclerView rvMusic = (RecyclerView) rootView.findViewById(R.id.music_recycler);
+        ArrayList<Music> music = new ArrayList<Music>();
+        music.add(new Music("fireboy", "apollo", "tatoo"));
+        music.add(new Music("fireboy dml", "apollo", "afar"));
+        music.add(new Music("fireboy", "LTG", "vibration"));
+        music.add(new Music("fireboy", "apollo", "new york city girl"));
+
+        MusicAdapter adapter = new MusicAdapter(music);
+        rvMusic.setAdapter(adapter);
+        rvMusic.setLayoutManager(new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.VERTICAL, false));
         setHasOptionsMenu(true);
         return rootView;
     }
