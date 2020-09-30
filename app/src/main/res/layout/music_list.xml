@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@color/black"
         android:weightSum="100">
 
         <ImageView
@@ -35,8 +36,11 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:id="@+id/title"
                 android:text="@string/title"
-                android:textSize="20dp"
-                android:padding="8dp"/>
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:paddingStart="8dp"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -44,19 +48,19 @@
                 android:id="@+id/subTitle"
                 android:textColor="@color/colorPrimaryDark"
                 android:text="SubTitle"
-                android:textSize="18dp"
+                android:textSize="12dp"
                 android:paddingStart="8dp"
-                android:paddingBottom="8dp"/>
+                android:paddingBottom="4dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/track"
-                android:textSize="16dp"
+                android:textSize="10dp"
                 android:text="@string/track"
                 android:textColor="@color/colorPrimaryDark"
                 android:paddingStart="8dp"
-                android:paddingBottom="8dp" />
+                android:paddingBottom="4dp" />
         </LinearLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>

@@ -26,6 +26,7 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -53,13 +54,17 @@ public class TrackFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-//    private ProgressBar mLoadingProgress = (ProgressBar) getActivity().findViewById(R.id.pb_loading);
+    private ProgressBar mLoadingProgress;
+    private RecyclerView mRvBooks;
+    private TextView mTvError;
 
     public TrackFragment() {
         // Required empty public constructor
     }
 
-    private static  final String USER_REQUEST = "https://api.deezer.com/search?q=artist:" + "\fireboy\"";
+
+    static final String BLOW = "vibration";
+    private static final String USER_REQUEST = "https://api.deezer.com/search?q=track:" + '"' + BLOW + '"';
 
 
     /**
@@ -96,6 +101,9 @@ public class TrackFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView =  inflater.inflate(R.layout.fragment_track, container, false);
 
+        mLoadingProgress = rootView.findViewById(R.id.pb_loading);
+        mRvBooks = rootView.findViewById(R.id.music_recycler);
+        mTvError = rootView.findViewById(R.id.tv_arrow);
         setHasOptionsMenu(true);
         MusicAsyncTask task = new MusicAsyncTask();
         task.execute();
@@ -154,31 +162,29 @@ public class TrackFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
-//            mLoadingProgress.setVisibility(View.INVISIBLE);
-            RecyclerView rvBooks = getActivity().findViewById(R.id.music_recycler);
-            TextView tvError = (TextView) getActivity().findViewById(R.id.tv_arrow);
-            if (result == null){
-                rvBooks.setVisibility(View.INVISIBLE);
-                tvError.setVisibility(View.VISIBLE);
+            mLoadingProgress.setVisibility(View.INVISIBLE);
+            if (result.isEmpty()){
+                mRvBooks.setVisibility(View.INVISIBLE);
+                mTvError.setVisibility(View.VISIBLE);
             }
             else{
-                tvError.setVisibility(View.INVISIBLE);
-                rvBooks.setVisibility(View.VISIBLE);
+                mTvError.setVisibility(View.INVISIBLE);
+                mRvBooks.setVisibility(View.VISIBLE);
                 ArrayList<Music> music = getBooksFromJson(result);
 
 
 
                 String resultString = "";
                 MusicAdapter adapter = new MusicAdapter(music);
-                rvBooks.setAdapter(adapter);
-                rvBooks.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                mRvBooks.setAdapter(adapter);
+                mRvBooks.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
             }
         }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            mLoadingProgress.setVisibility(View.VISIBLE);
+            mLoadingProgress.setVisibility(View.VISIBLE);
         }
 
         private String extractFeatureFromJson(String jsonResponse) {
@@ -252,15 +258,15 @@ public class TrackFragment extends Fragment {
             int numberOfMusic = arrayMusic.length();
             for(int i = 0; i < numberOfMusic; i++){
                 JSONObject musicJSON = arrayMusic.getJSONObject(i);
-                JSONObject title = musicJSON.getJSONObject(SONG);
+//                JSONObject title = musicJSON.getJSONObject(SONG);
                 JSONObject artistInfoJson = musicJSON.getJSONObject(ARTISTINFO);
                 JSONObject imageLinksJson = null;
                 if(artistInfoJson.has(PICTUREXL)){
-                    imageLinksJson = artistInfoJson.getJSONObject(PICTUREXL);
+//                    imageLinksJson = artistInfoJson.getJSONObject(PICTUREXL);
                 }
-                JSONObject artistName = artistInfoJson.getJSONObject("name");
+//                JSONObject artistName = artistInfoJson.getJSONObject("name");
                 JSONObject album = musicJSON.getJSONObject(ALBUMINFO);
-                JSONObject albumTitle = album.getJSONObject(SONG);
+//                JSONObject albumTitle = album.getJSONObject(SONG);
                 Music music1 = new Music(
                         musicJSON.getString(SONG),
                         artistInfoJson.getString("name"),
