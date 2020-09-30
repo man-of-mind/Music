@@ -161,7 +161,6 @@ public class AlbumFragment extends Fragment {
                 mRvBooks.setVisibility(View.VISIBLE);
                 ArrayList<Music> music = getBooksFromJson(result);
 
-
                 MusicAdapter adapter = new MusicAdapter(music);
                 mRvBooks.setAdapter(adapter);
                 mRvBooks.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
