@@ -109,7 +109,7 @@ public class ArtistFragment extends Fragment {
         MenuItem search = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) search.getActionView();
         searchView.setQueryHint("Search Artist");
-        searchView.setIconified(false);
+        searchView.setIconifiedByDefault(false);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -155,6 +155,7 @@ public class ArtistFragment extends Fragment {
             if (result.isEmpty()){
                 mRvBooks.setVisibility(View.INVISIBLE);
                 mTvError.setVisibility(View.VISIBLE);
+                Toast.makeText(getContext(), "Error retrieving data from the internet", Toast.LENGTH_SHORT).show();
             }
             else{
                 mTvError.setVisibility(View.INVISIBLE);

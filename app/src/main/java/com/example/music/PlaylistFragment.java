@@ -155,6 +155,7 @@ public class PlaylistFragment extends Fragment {
             if (result.isEmpty()){
                 mRvBooks.setVisibility(View.INVISIBLE);
                 mTvError.setVisibility(View.VISIBLE);
+                Toast.makeText(getContext(), "Error retrieving data from the internet", Toast.LENGTH_SHORT).show();
             }
             else{
                 mTvError.setVisibility(View.INVISIBLE);
@@ -259,7 +260,6 @@ public class PlaylistFragment extends Fragment {
                         artistInfoJson.getString("name"),
                         album.getString(SONG),
                         imageLinksJson);
-//                        (imageLinksJson==null?"":imageLinksJson.getString(THUMBNAIL)));
                 music.add(music1);
             }
         }
