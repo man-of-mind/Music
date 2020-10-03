@@ -5,7 +5,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 public class Music {
-    private static String mImage;
+    private String mImage;
     private String mArtist;
     private String mAlbum;
     private String mTrack;
@@ -34,7 +34,7 @@ public class Music {
         return mTrack;
     }
 
-    public static String getImage() {
+    public String getImage() {
         return mImage;
     }
 }

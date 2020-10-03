@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MusicViewHolder> {
     private ArrayList<Music> mMusic;
-    private String mImageUrl = Music.getImage();
 
     @NonNull
     @Override
@@ -41,7 +40,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MusicViewHol
         TextView textView2 = holder.track;
         textView2.setText(music.getTrack());
         ImageView imageView = holder.image;
-        Picasso.with(imageView.getContext()).load(mImageUrl).error(R.drawable.ic_baseline_insert_photo_24).into(imageView);
+        Picasso.with(imageView.getContext()).load(music.getImage()).error(R.drawable.ic_baseline_insert_photo_24).into(imageView);
     }
 
     @Override

@@ -57,8 +57,7 @@ public class ArtistFragment extends Fragment {
         // Required empty public constructor
     }
 
-    static final String BLOW = "drake";
-    private static final String USER_REQUEST = "https://api.deezer.com/search?q=artist:" + '"' + BLOW + '"';
+    private static final String REQUEST = "https://api.deezer.com/search?q=artist:";
 
     /**
      * Use this factory method to create a new instance of
@@ -97,8 +96,6 @@ public class ArtistFragment extends Fragment {
         mRvBooks = rootView.findViewById(R.id.music_recycler);
         mTvError = rootView.findViewById(R.id.tv_arrow);
         setHasOptionsMenu(true);
-        MusicAsyncTask task = new MusicAsyncTask();
-        task.execute();
 
         return rootView;
     }
@@ -113,6 +110,14 @@ public class ArtistFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                String USER_REQUEST = REQUEST + '"' + query + '"';
+                URL url = null;
+                try {
+                    url = new URL(USER_REQUEST);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+                new MusicAsyncTask().execute(url);
                 return false;
             }
 
@@ -136,7 +141,7 @@ public class ArtistFragment extends Fragment {
 
         @Override
         protected String doInBackground(URL... urls) {
-            URL url = createUrl(USER_REQUEST);
+            URL url = urls[0];
             String jsonResponse = "";
             try {
                 jsonResponse = makeHttpRequest(url);
@@ -191,8 +196,13 @@ public class ArtistFragment extends Fragment {
                 urlConnection.setReadTimeout(10000);
                 urlConnection.setConnectTimeout(15000);
                 urlConnection.connect();
-                inputStream = urlConnection.getInputStream();
-                jsonResponse = readFromStream(inputStream);
+                if (urlConnection.getResponseCode() == 200) {
+                    inputStream = urlConnection.getInputStream();
+                    jsonResponse = readFromStream(inputStream);
+                }
+                else{
+                    Log.e(ArtistFragment.class.getSimpleName(), "Query not successful");
+                }
             }
             catch (IOException e){
 
@@ -220,18 +230,6 @@ public class ArtistFragment extends Fragment {
             }
             return output.toString();
         }
-
-
-        private URL createUrl(String userRequest) {
-            URL url = null;
-            try {
-                url = new URL(userRequest);
-            }
-            catch (MalformedURLException e){
-                Log.e(TrackFragment.class.getSimpleName(), "Error with creating url", e);
-            }
-            return url;
-        }
     }
     public static ArrayList<Music> getBooksFromJson(String json){
         final String ID = "id";
@@ -239,7 +237,7 @@ public class ArtistFragment extends Fragment {
         final String DATA = "data";
         final String ARTISTINFO = "artist";
         final String ALBUMINFO = "album";
-        final String PICTUREXL = "picture_xl";
+        final String COVER = "cover";
 
         ArrayList<Music> music = new ArrayList<Music>();
         try{
@@ -248,21 +246,17 @@ public class ArtistFragment extends Fragment {
             int numberOfMusic = arrayMusic.length();
             for(int i = 0; i < numberOfMusic; i++){
                 JSONObject musicJSON = arrayMusic.getJSONObject(i);
-//                JSONObject title = musicJSON.getJSONObject(SONG);
                 JSONObject artistInfoJson = musicJSON.getJSONObject(ARTISTINFO);
-                String imageLinksJson = null;
-                if(artistInfoJson.has(PICTUREXL)){
-                    imageLinksJson = artistInfoJson.getString(PICTUREXL);
-                }
-//                JSONObject artistName = artistInfoJson.getJSONObject("name");
                 JSONObject album = musicJSON.getJSONObject(ALBUMINFO);
-//                JSONObject albumTitle = album.getJSONObject(SONG);
+                String imageLinksJson = null;
+                if(album.has(COVER)){
+                    imageLinksJson = album.getString(COVER);
+                }
                 Music music1 = new Music(
                         musicJSON.getString(SONG),
                         artistInfoJson.getString("name"),
                         album.getString(SONG),
                         imageLinksJson);
-//                        (imageLinksJson==null?"":imageLinksJson.getString(THUMBNAIL)));
                 music.add(music1);
             }
         }

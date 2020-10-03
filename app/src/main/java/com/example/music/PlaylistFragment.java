@@ -57,8 +57,7 @@ public class PlaylistFragment extends Fragment {
         // Required empty public constructor
     }
 
-    static final String BLOW = "love me";
-    private static final String USER_REQUEST = "https://api.deezer.com/search?q=playlist:" + '"' + BLOW + '"';
+    private static final String REQUEST = "https://api.deezer.com/search?q=playlist:";
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -96,8 +95,6 @@ public class PlaylistFragment extends Fragment {
         mRvBooks = rootView.findViewById(R.id.music_recycler);
         mTvError = rootView.findViewById(R.id.tv_arrow);
         setHasOptionsMenu(true);
-        MusicAsyncTask task = new MusicAsyncTask();
-        task.execute();
 
         return rootView;
     }
@@ -113,6 +110,14 @@ public class PlaylistFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                String USER_REQUEST = REQUEST + '"' + query + '"';
+                URL url = null;
+                try {
+                    url = new URL(USER_REQUEST);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+                new MusicAsyncTask().execute(url);
                 return false;
             }
 
@@ -136,7 +141,7 @@ public class PlaylistFragment extends Fragment {
 
         @Override
         protected String doInBackground(URL... urls) {
-            URL url = createUrl(USER_REQUEST);
+            URL url = urls[0];
             String jsonResponse = "";
             try {
                 jsonResponse = makeHttpRequest(url);
@@ -218,18 +223,6 @@ public class PlaylistFragment extends Fragment {
             }
             return output.toString();
         }
-
-
-        private URL createUrl(String userRequest) {
-            URL url = null;
-            try {
-                url = new URL(userRequest);
-            }
-            catch (MalformedURLException e){
-                Log.e(TrackFragment.class.getSimpleName(), "Error with creating url", e);
-            }
-            return url;
-        }
     }
     public static ArrayList<Music> getBooksFromJson(String json){
         final String ID = "id";
@@ -237,7 +230,7 @@ public class PlaylistFragment extends Fragment {
         final String DATA = "data";
         final String ARTISTINFO = "artist";
         final String ALBUMINFO = "album";
-        final String PICTUREXL = "picture_xl";
+        final String PICTUREXL = "cover";
 
         ArrayList<Music> music = new ArrayList<Music>();
         try{
@@ -248,12 +241,13 @@ public class PlaylistFragment extends Fragment {
                 JSONObject musicJSON = arrayMusic.getJSONObject(i);
 //                JSONObject title = musicJSON.getJSONObject(SONG);
                 JSONObject artistInfoJson = musicJSON.getJSONObject(ARTISTINFO);
+                JSONObject album = musicJSON.getJSONObject(ALBUMINFO);
                 String imageLinksJson = null;
-                if(artistInfoJson.has(PICTUREXL)){
-                    imageLinksJson = artistInfoJson.getString(PICTUREXL);
+                if(album.has(PICTUREXL)){
+                    imageLinksJson = album.getString(PICTUREXL);
                 }
 //                JSONObject artistName = artistInfoJson.getJSONObject("name");
-                JSONObject album = musicJSON.getJSONObject(ALBUMINFO);
+
 //                JSONObject albumTitle = album.getJSONObject(SONG);
                 Music music1 = new Music(
                         musicJSON.getString(SONG),
