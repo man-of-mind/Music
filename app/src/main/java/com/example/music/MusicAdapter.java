@@ -4,15 +4,20 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MusicViewHolder> {
     private ArrayList<Music> mMusic;
+    private String mImageUrl = Music.getImage();
+
     @NonNull
     @Override
     public MusicAdapter.MusicViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -35,6 +40,8 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MusicViewHol
         textView1.setText(music.getAlbum());
         TextView textView2 = holder.track;
         textView2.setText(music.getTrack());
+        ImageView imageView = holder.image;
+        Picasso.with(imageView.getContext()).load(mImageUrl).error(R.drawable.ic_baseline_insert_photo_24).into(imageView);
     }
 
     @Override
@@ -45,16 +52,20 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MusicViewHol
     public MusicAdapter(ArrayList<Music> music){
         mMusic = music;
     }
+
     public class MusicViewHolder extends RecyclerView.ViewHolder {
 
         public TextView artist;
         public TextView album;
         public TextView track;
+        public ImageView image;
+
         public MusicViewHolder(@NonNull View itemView) {
             super(itemView);
             artist = (TextView) itemView.findViewById(R.id.title);
             album = (TextView) itemView.findViewById(R.id.subTitle);
             track = (TextView) itemView.findViewById(R.id.track);
+            image = (ImageView) itemView.findViewById(R.id.imageUrl);
         }
     }
 }

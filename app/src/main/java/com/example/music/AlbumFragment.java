@@ -246,9 +246,9 @@ public class AlbumFragment extends Fragment {
                 JSONObject musicJSON = arrayMusic.getJSONObject(i);
 //                JSONObject title = musicJSON.getJSONObject(SONG);
                 JSONObject artistInfoJson = musicJSON.getJSONObject(ARTISTINFO);
-                JSONObject imageLinksJson = null;
+                String imageLinksJson = null;
                 if(artistInfoJson.has(PICTUREXL)){
-//                    imageLinksJson = artistInfoJson.getJSONObject(PICTUREXL);
+                    imageLinksJson = artistInfoJson.getString(PICTUREXL);
                 }
 //                JSONObject artistName = artistInfoJson.getJSONObject("name");
                 JSONObject album = musicJSON.getJSONObject(ALBUMINFO);
@@ -256,7 +256,8 @@ public class AlbumFragment extends Fragment {
                 Music music1 = new Music(
                         musicJSON.getString(SONG),
                         artistInfoJson.getString("name"),
-                        album.getString(SONG));
+                        album.getString(SONG),
+                        imageLinksJson);
 //                        (imageLinksJson==null?"":imageLinksJson.getString(THUMBNAIL)));
                 music.add(music1);
             }

@@ -19,6 +19,7 @@
 
         <ImageView
             android:layout_width="0dp"
+            android:id="@+id/imageUrl"
             android:layout_height="match_parent"
             android:layout_weight="25"
             android:layout_gravity="center"
