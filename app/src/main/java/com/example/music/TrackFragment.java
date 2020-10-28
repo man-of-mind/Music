@@ -59,6 +59,7 @@ public class TrackFragment extends Fragment {
     private RecyclerView mRvBooks;
     private TextView mTvError;
 
+
     public TrackFragment() {
         // Required empty public constructor
     }
@@ -103,6 +104,11 @@ public class TrackFragment extends Fragment {
         mLoadingProgress = rootView.findViewById(R.id.pb_loading);
         mRvBooks = rootView.findViewById(R.id.music_recycler);
         mTvError = rootView.findViewById(R.id.tv_arrow);
+
+        LinearLayoutManager musicLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager
+                .VERTICAL, false);
+        mRvBooks.setLayoutManager(musicLayoutManager);
+
         setHasOptionsMenu(true);
 
         return rootView;
@@ -181,9 +187,9 @@ public class TrackFragment extends Fragment {
 
 
                 String resultString = "";
-                MusicAdapter adapter = new MusicAdapter(music);
+                MusicAdapter adapter = new MusicAdapter(getContext(), music, mRvBooks);
                 mRvBooks.setAdapter(adapter);
-                mRvBooks.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+//                mRvBooks.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
             }
         }
 

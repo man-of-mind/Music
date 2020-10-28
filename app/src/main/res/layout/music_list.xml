@@ -37,7 +37,7 @@
                 android:id="@+id/title"
                 android:text="@string/title"
                 android:textStyle="bold"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:paddingStart="8dp"
                 android:paddingBottom="6dp"
                 android:paddingTop="4dp"/>
@@ -48,7 +48,7 @@
                 android:id="@+id/subTitle"
                 android:textColor="@color/colorPrimaryDark"
                 android:text="SubTitle"
-                android:textSize="13dp"
+                android:textSize="13sp"
                 android:paddingStart="8dp"
                 android:paddingBottom="6dp"/>
 
@@ -56,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/track"
-                android:textSize="11dp"
+                android:textSize="11sp"
                 android:text="@string/track"
                 android:textColor="@color/colorPrimaryDark"
                 android:paddingStart="8dp"

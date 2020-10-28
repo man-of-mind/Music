@@ -31,4 +31,5 @@
     <string name="search">Search</string>
     <string name="error_data_message">Hmmm.....seems something is wrong.</string>
     <string name="title">Title</string>
+    <string name="title_activity_music_detail">MusicDetailActivity</string>
 </resources>

@@ -170,7 +170,7 @@ public class ArtistFragment extends Fragment {
 
 
                 String resultString = "";
-                MusicAdapter adapter = new MusicAdapter(music);
+                MusicAdapter adapter = new MusicAdapter(getContext(), music, mRvBooks);
                 mRvBooks.setAdapter(adapter);
                 mRvBooks.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
             }

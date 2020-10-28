@@ -1,15 +1,17 @@
 package com.example.music;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.ImageView;
+import androidx.databinding.BindingAdapter;
+import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 
-public class Music {
+public class Music implements Parcelable {
     private String mImage;
     private String mArtist;
     private String mAlbum;
     private String mTrack;
-    private String mPlaylist;
 
     public Music(String artist, String album, String track, String image){
         this.mAlbum = album;
@@ -18,23 +20,63 @@ public class Music {
         this.mImage = image;
     }
 
-    public String getAlbum() {
-        return mAlbum;
+    protected Music(Parcel in) {
+        mImage = in.readString();
+        mArtist = in.readString();
+        mAlbum = in.readString();
+        mTrack = in.readString();
     }
 
-    public String getArtist() {
+    public static final Creator<Music> CREATOR = new Creator<Music>() {
+        @Override
+        public Music createFromParcel(Parcel in) {
+            return new Music(in);
+        }
+
+        @Override
+        public Music[] newArray(int size) {
+            return new Music[size];
+        }
+    };
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(mImage);
+        parcel.writeString(mArtist);
+        parcel.writeString(mAlbum);
+        parcel.writeString(mTrack);
+    }
+
+    public String getArtist(){
         return mArtist;
     }
 
-    public String getPlaylist() {
-        return mPlaylist;
+    public String getAlbum(){
+        return mAlbum;
     }
 
-    public String getTrack() {
+    public String getTrack(){
         return mTrack;
     }
 
-    public String getImage() {
+    public String getImage(){
         return mImage;
+    }
+
+    @BindingAdapter({"android:imageUrl"})
+    public static void loadImage(ImageView view, String imageUrl){
+        if(!imageUrl.isEmpty()) {
+            Picasso.with(view.getContext()).load(imageUrl).placeholder
+                    (R.drawable.ic_baseline_insert_photo_24).into(view);
+        }
+        else{
+            view.setBackgroundResource(R.drawable.ic_baseline_insert_photo_24);
+        }
     }
 }
