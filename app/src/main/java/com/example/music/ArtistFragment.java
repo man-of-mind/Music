@@ -232,12 +232,13 @@ public class ArtistFragment extends Fragment {
         }
     }
     public static ArrayList<Music> getBooksFromJson(String json){
-        final String ID = "id";
         final String SONG = "title";
         final String DATA = "data";
-        final String ARTISTINFO = "artist";
-        final String ALBUMINFO = "album";
+        final String ARTIST_INFO = "artist";
+        final String ALBUM_INFO = "album";
         final String COVER = "cover";
+        final String link = "link";
+        final String IMAGE_LARGE = "picture_big";
 
         ArrayList<Music> music = new ArrayList<Music>();
         try{
@@ -246,8 +247,8 @@ public class ArtistFragment extends Fragment {
             int numberOfMusic = arrayMusic.length();
             for(int i = 0; i < numberOfMusic; i++){
                 JSONObject musicJSON = arrayMusic.getJSONObject(i);
-                JSONObject artistInfoJson = musicJSON.getJSONObject(ARTISTINFO);
-                JSONObject album = musicJSON.getJSONObject(ALBUMINFO);
+                JSONObject artistInfoJson = musicJSON.getJSONObject(ARTIST_INFO);
+                JSONObject album = musicJSON.getJSONObject(ALBUM_INFO);
                 String imageLinksJson = null;
                 if(album.has(COVER)){
                     imageLinksJson = album.getString(COVER);
@@ -256,7 +257,7 @@ public class ArtistFragment extends Fragment {
                         musicJSON.getString(SONG),
                         artistInfoJson.getString("name"),
                         album.getString(SONG),
-                        imageLinksJson);
+                        imageLinksJson, musicJSON.getString(link), artistInfoJson.getString(IMAGE_LARGE));
                 music.add(music1);
             }
         }

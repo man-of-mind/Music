@@ -228,9 +228,11 @@ public class PlaylistFragment extends Fragment {
         final String ID = "id";
         final String SONG = "title";
         final String DATA = "data";
-        final String ARTISTINFO = "artist";
-        final String ALBUMINFO = "album";
-        final String PICTUREXL = "cover";
+        final String ARTIST_INFO = "artist";
+        final String ALBUM_INFO = "album";
+        final String PICTURE_XL = "cover";
+        final String IMAGE_LARGE = "cover_big";
+        final String link = "link";
 
         ArrayList<Music> music = new ArrayList<Music>();
         try{
@@ -239,21 +241,17 @@ public class PlaylistFragment extends Fragment {
             int numberOfMusic = arrayMusic.length();
             for(int i = 0; i < numberOfMusic; i++){
                 JSONObject musicJSON = arrayMusic.getJSONObject(i);
-//                JSONObject title = musicJSON.getJSONObject(SONG);
-                JSONObject artistInfoJson = musicJSON.getJSONObject(ARTISTINFO);
-                JSONObject album = musicJSON.getJSONObject(ALBUMINFO);
+                JSONObject artistInfoJson = musicJSON.getJSONObject(ARTIST_INFO);
+                JSONObject album = musicJSON.getJSONObject(ALBUM_INFO);
                 String imageLinksJson = null;
-                if(album.has(PICTUREXL)){
-                    imageLinksJson = album.getString(PICTUREXL);
+                if(album.has(PICTURE_XL)){
+                    imageLinksJson = album.getString(PICTURE_XL);
                 }
-//                JSONObject artistName = artistInfoJson.getJSONObject("name");
-
-//                JSONObject albumTitle = album.getJSONObject(SONG);
                 Music music1 = new Music(
                         musicJSON.getString(SONG),
                         artistInfoJson.getString("name"),
                         album.getString(SONG),
-                        imageLinksJson);
+                        imageLinksJson, musicJSON.getString(link), album.getString(IMAGE_LARGE));
                 music.add(music1);
             }
         }

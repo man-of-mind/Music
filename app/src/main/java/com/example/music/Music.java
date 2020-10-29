@@ -12,12 +12,16 @@ public class Music implements Parcelable {
     private String mArtist;
     private String mAlbum;
     private String mTrack;
+    private String mLink;
+    private String mImageLarge;
 
-    public Music(String artist, String album, String track, String image){
+    public Music(String artist, String album, String track, String image, String link, String imageLarge){
         this.mAlbum = album;
         this.mArtist = artist;
         this.mTrack = track;
         this.mImage = image;
+        this.mLink = link;
+        this.mImageLarge = imageLarge;
     }
 
     protected Music(Parcel in) {
@@ -25,6 +29,8 @@ public class Music implements Parcelable {
         mArtist = in.readString();
         mAlbum = in.readString();
         mTrack = in.readString();
+        mLink = in.readString();
+        mImageLarge = in.readString();
     }
 
     public static final Creator<Music> CREATOR = new Creator<Music>() {
@@ -51,6 +57,8 @@ public class Music implements Parcelable {
         parcel.writeString(mArtist);
         parcel.writeString(mAlbum);
         parcel.writeString(mTrack);
+        parcel.writeString(mImageLarge);
+        parcel.writeString(mLink);
     }
 
     public String getArtist(){
@@ -67,6 +75,14 @@ public class Music implements Parcelable {
 
     public String getImage(){
         return mImage;
+    }
+
+    public String getLink(){
+        return mLink;
+    }
+
+    public String getImageLarge(){
+        return mImageLarge;
     }
 
     @BindingAdapter({"android:imageUrl"})
