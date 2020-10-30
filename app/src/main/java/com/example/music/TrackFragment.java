@@ -254,9 +254,9 @@ public class TrackFragment extends Fragment {
         final String DATA = "data";
         final String ARTIST_INFO = "artist";
         final String ALBUM_INFO = "album";
-        final String COVER = "cover";
+        final String COVER = "cover_medium";
         final String LINK = "link";
-        final String LARGE_IMAGE = "cover_big";
+        final String LARGE_IMAGE = "cover_xl";
 
         ArrayList<Music> music = new ArrayList<Music>();
         try{
@@ -271,11 +271,15 @@ public class TrackFragment extends Fragment {
                 if(album.has(COVER)){
                     imageLinksJson = album.getString(COVER);
                 }
+                String bigCover = null;
+                if(album.has(LARGE_IMAGE)){
+                    bigCover = album.getString(LARGE_IMAGE);
+                }
                 Music music1 = new Music(
                         musicJSON.getString(TITLE),
                         artistInfoJson.getString("name"),
                         album.getString(TITLE),
-                        imageLinksJson, musicJSON.getString(LINK), album.getString(LARGE_IMAGE));
+                        imageLinksJson, bigCover); //musicJSON.getString(LINK));
                 music.add(music1);
             }
         }

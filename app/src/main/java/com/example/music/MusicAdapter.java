@@ -64,7 +64,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MusicViewHol
         TextView textView2 = holder.track;
         textView2.setText(music.getTrack());
         ImageView imageView = holder.image;
-        Picasso.with(imageView.getContext()).load(music.getImage()).error(R.drawable.ic_baseline_insert_photo_24).into(imageView);
+        Picasso.with(imageView.getContext()).load(music.getImage()).error(R.drawable.ic_baseline_music_note_24).into(imageView);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MusicViewHol
 
 
 
-    public class MusicViewHolder extends RecyclerView.ViewHolder {
+    public static class MusicViewHolder extends RecyclerView.ViewHolder {
 
         public TextView artist;
         public TextView album;

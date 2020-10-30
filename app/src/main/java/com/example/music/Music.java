@@ -2,6 +2,7 @@ package com.example.music;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 import android.widget.ImageView;
 import androidx.databinding.BindingAdapter;
 import com.squareup.picasso.Picasso;
@@ -15,12 +16,12 @@ public class Music implements Parcelable {
     private String mLink;
     private String mImageLarge;
 
-    public Music(String artist, String album, String track, String image, String link, String imageLarge){
+    public Music(String artist, String album, String track, String image, String imageLarge){
         this.mAlbum = album;
         this.mArtist = artist;
         this.mTrack = track;
         this.mImage = image;
-        this.mLink = link;
+//        this.mLink = link;
         this.mImageLarge = imageLarge;
     }
 
@@ -29,7 +30,7 @@ public class Music implements Parcelable {
         mArtist = in.readString();
         mAlbum = in.readString();
         mTrack = in.readString();
-        mLink = in.readString();
+//        mLink = in.readString();
         mImageLarge = in.readString();
     }
 
@@ -58,7 +59,7 @@ public class Music implements Parcelable {
         parcel.writeString(mAlbum);
         parcel.writeString(mTrack);
         parcel.writeString(mImageLarge);
-        parcel.writeString(mLink);
+//        parcel.writeString(mLink);
     }
 
     public String getArtist(){
@@ -88,11 +89,10 @@ public class Music implements Parcelable {
     @BindingAdapter({"android:imageUrl"})
     public static void loadImage(ImageView view, String imageUrl){
         if(!imageUrl.isEmpty()) {
-            Picasso.with(view.getContext()).load(imageUrl).placeholder
-                    (R.drawable.ic_baseline_insert_photo_24).into(view);
+            Picasso.with(view.getContext()).load(imageUrl).placeholder(R.drawable.ic_baseline_music_note_24).into(view);
         }
         else{
-            view.setBackgroundResource(R.drawable.ic_baseline_insert_photo_24);
+            view.setBackgroundResource(R.drawable.ic_baseline_music_note_24);
         }
     }
 }

@@ -230,7 +230,7 @@ public class AlbumFragment extends Fragment {
         final String ARTIST_INFO = "artist";
         final String ALBUM_INFO = "album";
         final String COVER = "cover";
-        final String IMAGE_LARGE = "cover_big";
+        final String IMAGE_LARGE = "cover_xl";
         final String link = "link";
 
         ArrayList<Music> music = new ArrayList<Music>();
@@ -247,10 +247,10 @@ public class AlbumFragment extends Fragment {
                     imageLinksJson = album.getString(COVER);
                 }
                 Music music1 = new Music(
-                        musicJSON.getString(SONG),
                         artistInfoJson.getString("name"),
+                        musicJSON.getString(SONG),
                         album.getString(SONG),
-                        imageLinksJson, musicJSON.getString(link), album.getString(IMAGE_LARGE));
+                        imageLinksJson, album.getString(IMAGE_LARGE)); //musicJSON.getString(link), ;
                 music.add(music1);
             }
         }

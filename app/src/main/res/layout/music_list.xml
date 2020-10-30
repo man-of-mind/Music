@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:layout_weight="25"
             android:layout_gravity="fill_vertical"
-            android:src="@drawable/ic_baseline_insert_photo_24" />
+            android:src="@drawable/ic_baseline_music_note_24" />
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -38,6 +38,7 @@
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:paddingStart="8dp"
+                android:paddingEnd="8dp"
                 android:paddingBottom="6dp"
                 android:paddingTop="4dp"/>
 
@@ -46,19 +47,21 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/subTitle"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="SubTitle"
-                android:textSize="13sp"
+                android:text="@string/subtitle"
+                android:textSize="14sp"
                 android:paddingStart="8dp"
+                android:paddingEnd="8dp"
                 android:paddingBottom="6dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/track"
-                android:textSize="11sp"
+                android:textSize="12sp"
                 android:text="@string/track"
                 android:textColor="@color/colorPrimaryDark"
                 android:paddingStart="8dp"
+                android:paddingEnd="8dp"
                 android:paddingBottom="6dp" />
         </LinearLayout>
 

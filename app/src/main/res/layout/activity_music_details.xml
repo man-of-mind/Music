@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
@@ -19,8 +18,10 @@
             android:id="@+id/imgCover"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="8dp"
-            android:layout_gravity="fill_vertical"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="8dp"
+            android:layout_gravity="center_vertical"
             android:imageUrl="@{Music.getImageLarge()}"
             android:layout_weight="55"/>
 
@@ -30,35 +31,35 @@
             android:layout_weight="45"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvAuthors"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textAlignment="center"
-                android:text="@{Music.getTrack()}"
-                android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="100"
+                tools:ignore="UselessParent">
 
-            <TextView
-                android:id="@+id/tvPublisher"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textAlignment="center"
-                android:text="@{Music.getArtist()}"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/musicTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:layout_margin="8dp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="@{Music.getArtist()}"
+                    android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/album"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textAlignment="center"
-                android:text="@{Music.getAlbum()}"
-                android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/artist"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_margin="8dp"
+                    android:text="@{Music.getAlbum()}"
+                    android:textSize="24sp" />
+            </LinearLayout>
         </LinearLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

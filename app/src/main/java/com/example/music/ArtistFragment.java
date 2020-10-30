@@ -254,10 +254,10 @@ public class ArtistFragment extends Fragment {
                     imageLinksJson = album.getString(COVER);
                 }
                 Music music1 = new Music(
-                        musicJSON.getString(SONG),
                         artistInfoJson.getString("name"),
+                        musicJSON.getString(SONG),
                         album.getString(SONG),
-                        imageLinksJson, musicJSON.getString(link), artistInfoJson.getString(IMAGE_LARGE));
+                        imageLinksJson, artistInfoJson.getString(IMAGE_LARGE)); //musicJSON.getString(link));
                 music.add(music1);
             }
         }
