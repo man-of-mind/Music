@@ -33,4 +33,6 @@
     <string name="title">Title</string>
     <string name="title_activity_music_detail">MusicDetailActivity</string>
     <string name="subtitle">SubTitle</string>
+    <string name="music_player">MUSIC PLAYER</string>
+    <string name="songcoverpicture">songCoverPicture</string>
 </resources>

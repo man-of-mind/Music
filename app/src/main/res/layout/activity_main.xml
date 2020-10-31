@@ -1,31 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-
-    <com.google.android.material.appbar.AppBarLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-
-"?attr/colorPrimary"
-    </com.google.android.material.appbar.AppBarLayout>
--->
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
@@ -44,8 +17,6 @@
         app:layout_scrollFlags="scroll|enterAlways" >
     </androidx.appcompat.widget.Toolbar>
 
-<!--        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
--->
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
@@ -68,4 +39,3 @@
 
     </RelativeLayout>
 
-<!--</androidx.coordinatorlayout.widget.CoordinatorLayout>-->

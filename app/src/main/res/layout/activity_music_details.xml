@@ -14,51 +14,121 @@
         android:background="@color/black"
         android:weightSum="100">
 
-        <ImageView
-            android:id="@+id/imgCover"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:paddingTop="8dp"
-            android:layout_gravity="center_vertical"
-            android:imageUrl="@{Music.getImageLarge()}"
-            android:layout_weight="55"/>
+            android:orientation="vertical"
+            android:layout_weight="10">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:text="@string/music_player"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="45"
+            android:layout_weight="50"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgCover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:layout_gravity="center_vertical"
+                android:imageUrl="@{Music.getImageLarge()}"
+                android:contentDescription="@string/songcoverpicture" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="25"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/musicTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="@{Music.getArtist()}"
+                android:textSize="24sp"
+                android:fontFamily="sans-serif-medium"/>
+
+            <TextView
+                android:id="@+id/artist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@{Music.getAlbum()}"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="22sp" />
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:visibility="visible"
+                tools:visibility="visible" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="15"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:weightSum="100"
-                tools:ignore="UselessParent">
+                android:weightSum="100">
 
-                <TextView
-                    android:id="@+id/musicTitle"
+                <ImageView
+                    android:id="@+id/rewind"
+                    android:layout_width="0dp"
+                    android:layout_weight="30"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_fast_rewind_24"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginBottom="8dp"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="50"
-                    android:layout_margin="8dp"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:text="@{Music.getArtist()}"
-                    android:textSize="24sp" />
+                    android:layout_weight="40"
+                    android:src="@drawable/ic_baseline_play_circle_filled_24"
+                    android:layout_margin="16dp"
+                    android:contentDescription="@string/songcoverpicture" />
 
-                <TextView
-                    android:id="@+id/artist"
+                <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="50"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:layout_margin="8dp"
-                    android:text="@{Music.getAlbum()}"
-                    android:textSize="24sp" />
+                    android:layout_weight="30"
+                    android:src="@drawable/ic_baseline_fast_forward_24"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="8dp"
+                    tools:ignore="ContentDescription" />
             </LinearLayout>
         </LinearLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
