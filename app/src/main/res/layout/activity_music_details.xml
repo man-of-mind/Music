@@ -64,7 +64,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimaryDark"
                 android:text="@{Music.getArtist()}"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:fontFamily="sans-serif-medium"/>
 
             <TextView
@@ -77,7 +77,7 @@
                 android:layout_marginEnd="8dp"
                 android:text="@{Music.getAlbum()}"
                 android:fontFamily="sans-serif-medium"
-                android:textSize="22sp" />
+                android:textSize="18sp" />
 
             <SeekBar
                 android:id="@+id/seekBar"
