@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -109,10 +111,13 @@ public class TrackFragment extends Fragment {
                 .VERTICAL, false);
         mRvBooks.setLayoutManager(musicLayoutManager);
 
+
         setHasOptionsMenu(true);
 
         return rootView;
     }
+
+
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 
@@ -199,10 +204,6 @@ public class TrackFragment extends Fragment {
             mLoadingProgress.setVisibility(View.VISIBLE);
         }
 
-        private String extractFeatureFromJson(String jsonResponse) {
-            return null;
-        }
-
         private String makeHttpRequest(URL url) throws IOException {
             String jsonResponse = "";
             if (url != null) {
@@ -249,6 +250,8 @@ public class TrackFragment extends Fragment {
             return output.toString();
         }
     }
+
+
     public static ArrayList<Music> getBooksFromJson(String json){
         final String TITLE = "title";
         final String DATA = "data";
@@ -257,6 +260,7 @@ public class TrackFragment extends Fragment {
         final String COVER = "cover_medium";
         final String LINK = "link";
         final String LARGE_IMAGE = "cover_xl";
+        final String DURATION = "duration";
 
         ArrayList<Music> music = new ArrayList<Music>();
         try{
@@ -267,6 +271,7 @@ public class TrackFragment extends Fragment {
                 JSONObject musicJSON = arrayMusic.getJSONObject(i);
                 JSONObject artistInfoJson = musicJSON.getJSONObject(ARTIST_INFO);
                 JSONObject album = musicJSON.getJSONObject(ALBUM_INFO);
+                String duration = musicJSON.getString(DURATION);
                 String imageLinksJson = null;
                 if(album.has(COVER)){
                     imageLinksJson = album.getString(COVER);
@@ -279,7 +284,7 @@ public class TrackFragment extends Fragment {
                         musicJSON.getString(TITLE),
                         artistInfoJson.getString("name"),
                         album.getString(TITLE),
-                        imageLinksJson, bigCover); //musicJSON.getString(LINK));
+                        imageLinksJson, bigCover, duration); //musicJSON.getString(LINK));
                 music.add(music1);
             }
         }

@@ -2,13 +2,12 @@ package com.example.music;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,9 +30,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MusicViewHol
     private View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Log.e((String) view.getTag(), "onClick method is getting called");
             int position = mRecyclerView.getChildLayoutPosition(view);
-            Toast.makeText(mContext, "onClick activated", Toast.LENGTH_SHORT).show();
             Music selectedMusic = mMusic.get(position);
             Intent intent = new Intent(view.getContext(), MusicDetailsActivity.class);
             intent.putExtra("Music", selectedMusic);

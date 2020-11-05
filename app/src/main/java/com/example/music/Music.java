@@ -2,7 +2,6 @@ package com.example.music;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 import android.widget.ImageView;
 import androidx.databinding.BindingAdapter;
 import com.squareup.picasso.Picasso;
@@ -15,14 +14,16 @@ public class Music implements Parcelable {
     private String mTrack;
     private String mLink;
     private String mImageLarge;
+    private String mDuration;
 
-    public Music(String artist, String album, String track, String image, String imageLarge){
+    public Music(String artist, String album, String track, String image, String imageLarge, String duration){
         this.mAlbum = album;
         this.mArtist = artist;
         this.mTrack = track;
         this.mImage = image;
 //        this.mLink = link;
         this.mImageLarge = imageLarge;
+        this.mDuration = duration;
     }
 
     protected Music(Parcel in) {
@@ -32,6 +33,7 @@ public class Music implements Parcelable {
         mTrack = in.readString();
 //        mLink = in.readString();
         mImageLarge = in.readString();
+        mDuration = in.readString();
     }
 
     public static final Creator<Music> CREATOR = new Creator<Music>() {
@@ -59,6 +61,7 @@ public class Music implements Parcelable {
         parcel.writeString(mAlbum);
         parcel.writeString(mTrack);
         parcel.writeString(mImageLarge);
+        parcel.writeString(mDuration);
 //        parcel.writeString(mLink);
     }
 
@@ -84,6 +87,11 @@ public class Music implements Parcelable {
 
     public String getImageLarge(){
         return mImageLarge;
+    }
+
+    public int getDuration() {
+        String duration = mDuration;
+        return Integer.parseInt(duration);
     }
 
     @BindingAdapter({"android:imageUrl"})
