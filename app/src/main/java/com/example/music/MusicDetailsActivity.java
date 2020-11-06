@@ -71,6 +71,12 @@ public class MusicDetailsActivity extends AppCompatActivity {
         Log.d("MusicDetailsActivity", "duration of the second is " + seconds);
         int minute = (int) TimeUnit.SECONDS.toMinutes(seconds);
         int second = (int) (TimeUnit.SECONDS.toSeconds(seconds) - (TimeUnit.SECONDS.toMinutes(seconds) * 60));
-        return minute + ":" + second;
+        String duration;
+        if(second >= 0 && second <=9){
+            return minute + ":0" + second;
+        }
+        else {
+            return minute + ":" + second;
+        }
     }
 }
