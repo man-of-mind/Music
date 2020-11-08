@@ -25,7 +25,7 @@ public class MusicDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_music_details);
+        setContentView(R.layout.activity_music_detail);
         Music music = getIntent().getParcelableExtra("Music");
         ActivityMusicDetailsBinding dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_music_details);
         dataBinding.setMusic(music);
