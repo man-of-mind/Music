@@ -253,7 +253,7 @@ public class PlaylistFragment extends Fragment {
                         album.getString(SONG),
                         musicJSON.getString(SONG),
                         artistInfoJson.getString("name"),
-                        imageLinksJson, album.getString(IMAGE_LARGE), duration); //musicJSON.getString(link), ;
+                        imageLinksJson, album.getString(IMAGE_LARGE), duration, musicJSON.getString(link));
                 music.add(music1);
             }
         }

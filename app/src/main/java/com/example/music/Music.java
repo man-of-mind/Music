@@ -16,14 +16,14 @@ public class Music implements Parcelable {
     private String mImageLarge;
     private String mDuration;
 
-    public Music(String artist, String album, String track, String image, String imageLarge, String duration){
+    public Music(String artist, String album, String track, String image, String imageLarge, String duration, String link){
         this.mAlbum = album;
         this.mArtist = artist;
         this.mTrack = track;
         this.mImage = image;
-//        this.mLink = link;
         this.mImageLarge = imageLarge;
         this.mDuration = duration;
+        this.mLink = link;
     }
 
     protected Music(Parcel in) {
@@ -31,9 +31,9 @@ public class Music implements Parcelable {
         mArtist = in.readString();
         mAlbum = in.readString();
         mTrack = in.readString();
-//        mLink = in.readString();
         mImageLarge = in.readString();
         mDuration = in.readString();
+        mLink = in.readString();
     }
 
     public static final Creator<Music> CREATOR = new Creator<Music>() {
@@ -62,7 +62,7 @@ public class Music implements Parcelable {
         parcel.writeString(mTrack);
         parcel.writeString(mImageLarge);
         parcel.writeString(mDuration);
-//        parcel.writeString(mLink);
+        parcel.writeString(mLink);
     }
 
     public String getArtist(){

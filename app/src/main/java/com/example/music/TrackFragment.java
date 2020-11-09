@@ -284,7 +284,7 @@ public class TrackFragment extends Fragment {
                         musicJSON.getString(TITLE),
                         artistInfoJson.getString("name"),
                         album.getString(TITLE),
-                        imageLinksJson, bigCover, duration); //musicJSON.getString(LINK));
+                        imageLinksJson, bigCover, duration, musicJSON.getString(LINK));
                 music.add(music1);
             }
         }
