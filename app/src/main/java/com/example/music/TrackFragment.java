@@ -1,5 +1,6 @@
 package com.example.music;
 
+import android.annotation.SuppressLint;
 import android.app.usage.UsageEvents;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -160,6 +161,7 @@ public class TrackFragment extends Fragment {
         return true;
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class MusicAsyncTask extends AsyncTask<URL, Void, String> {
 
         @Override
@@ -258,7 +260,8 @@ public class TrackFragment extends Fragment {
         final String ARTIST_INFO = "artist";
         final String ALBUM_INFO = "album";
         final String COVER = "cover_medium";
-        final String LINK = "link";
+//        final String LINK = "link";
+        final  String LINK = "preview";
         final String LARGE_IMAGE = "cover_xl";
         final String DURATION = "duration";
 

@@ -2,21 +2,21 @@ package com.example.music;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
-import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.example.music.databinding.ActivityMusicDetailsBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.io.IOException;
@@ -30,8 +30,9 @@ public class MusicDetailsActivity extends AppCompatActivity {
     private SeekBar mSeekBar;
     private Music mMusic;
     private TextView startTime;
-    private Handler mHandler;
+    private Handler mHandler = new Handler();
     private FloatingActionButton mFab;
+
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -44,23 +45,24 @@ public class MusicDetailsActivity extends AppCompatActivity {
 
         startTime = findViewById(R.id.start);
         mFab = findViewById(R.id.play_pause);
+//        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mediaPlayer.isPlaying()){
+                if (mediaPlayer.isPlaying()) {
                     mHandler.removeCallbacks(updater);
                     mediaPlayer.pause();
-                    mFab.setImageResource(R.drawable.ic_baseline_play_circle_filled_24);
-                }
-                else{
+                    mFab.setImageResource(R.drawable.ic_baseline_play);
+                } else {
                     mediaPlayer.start();
                     mFab.setImageResource(R.drawable.ic_pause);
                     updateSeekBar();
                 }
             }
-        });
 
+        });
         prepareMediaPlayer();
+
         mSeekBar = findViewById(R.id.seekBar);
         mSeekBar.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -68,7 +70,7 @@ public class MusicDetailsActivity extends AppCompatActivity {
                 SeekBar seekBar = (SeekBar) view;
                 int playPosition = (mediaPlayer.getDuration() / 100) * seekBar.getProgress();
                 mediaPlayer.seekTo(playPosition);
-             //   startTime.setText(calculateCurrentTime(mediaPlayer.getCurrentPosition()));
+                startTime.setText(calculateTime(mediaPlayer.getCurrentPosition()));
                 return false;
             }
         });
@@ -88,7 +90,7 @@ public class MusicDetailsActivity extends AppCompatActivity {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
                 mSeekBar.setProgress(0);
-                mFab.setImageResource(R.drawable.ic_baseline_play_circle_filled_24);
+                mFab.setImageResource(R.drawable.ic_baseline_play);
                 startTime.setText(R.string.start_time);
                 mediaPlayer.reset();
                 prepareMediaPlayer();
@@ -101,7 +103,10 @@ public class MusicDetailsActivity extends AppCompatActivity {
     private void prepareMediaPlayer() {
         try {
             mediaPlayer.setDataSource(mMusic.getLink());
+//            mediaPlayer.setDataSource("https://www.ssaurel.com/tmp/mymusic.mp3");
+//            mediaPlayer.setDataSource(this, Uri.parse(mMusic.getLink()));
             mediaPlayer.prepare();
+            mediaPlayer.start();
         }
         catch (Exception e){
             Log.e("MusicDetailsActivity", Objects.requireNonNull(e.getMessage()));
@@ -113,21 +118,18 @@ public class MusicDetailsActivity extends AppCompatActivity {
         public void run() {
             updateSeekBar();
             long currentDuration = mediaPlayer.getCurrentPosition();
-//            startTime.setText(calculateCurrentTime(currentDuration));
+            startTime.setText(calculateTime(currentDuration));
         }
     };
 
-    private String calculateCurrentTime(long currentDuration) {
-        return null;
-    }
 
     private void updateSeekBar() {
         if(mediaPlayer.isPlaying()){
             mSeekBar.setProgress((int) (((float) mediaPlayer.getCurrentPosition() / mediaPlayer.getDuration()) * 100));
-            mHandler = new Handler();
             mHandler.postDelayed(updater, 1000);
         }
    }
+
 
 
     private static String calculateTime(long seconds){
