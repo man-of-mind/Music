@@ -14,8 +14,6 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TabLayout mTabLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         SimpleFragmentAdapter adapter = new SimpleFragmentAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(adapter);
-        mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        mTabLayout.setupWithViewPager(viewPager);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(viewPager);
 
         int[] imageResId = {
                 R.drawable.ic_baseline_music_note_24,
@@ -43,13 +41,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         for (int i = 0; i < imageResId.length; i++){
-            mTabLayout.getTabAt(i).setIcon(imageResId[i]);
+            tabLayout.getTabAt(i).setIcon(imageResId[i]);
             if( i != 0) {
-                mTabLayout.getTabAt(i).setTabLabelVisibility(TabLayout.TAB_LABEL_VISIBILITY_UNLABELED);
+                tabLayout.getTabAt(i).setTabLabelVisibility(TabLayout.TAB_LABEL_VISIBILITY_UNLABELED);
             }
         }
 
-        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 tab.setTabLabelVisibility(TabLayout.TAB_LABEL_VISIBILITY_LABELED);

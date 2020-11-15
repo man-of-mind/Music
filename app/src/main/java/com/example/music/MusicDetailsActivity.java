@@ -64,20 +64,22 @@ public class MusicDetailsActivity extends AppCompatActivity {
         prepareMediaPlayer();
 
         mSeekBar = findViewById(R.id.seekBar);
+        mSeekBar.setMax(mediaPlayer.getDuration());
         mSeekBar.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 SeekBar seekBar = (SeekBar) view;
                 int playPosition = (mediaPlayer.getDuration() / 100) * seekBar.getProgress();
                 mediaPlayer.seekTo(playPosition);
-                startTime.setText(calculateTime(mediaPlayer.getCurrentPosition()));
+                startTime.setText(calculateCurrentTime(mediaPlayer.getCurrentPosition()));
                 return false;
             }
         });
         assert mMusic != null;
-        long duration = mMusic.getDuration();
+//        long duration = mMusic.getDuration();
+        long duration = mediaPlayer.getDuration();
         TextView textView = findViewById(R.id.duration);
-        textView.setText(calculateTime(duration));
+        textView.setText(calculateCurrentTime(duration));
 
         mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
             @Override
@@ -118,9 +120,13 @@ public class MusicDetailsActivity extends AppCompatActivity {
         public void run() {
             updateSeekBar();
             long currentDuration = mediaPlayer.getCurrentPosition();
-            startTime.setText(calculateTime(currentDuration));
+            startTime.setText(calculateCurrentTime(currentDuration));
         }
     };
+
+    private String calculateCurrentTime(long currentDuration) {
+        return null;
+    }
 
 
     private void updateSeekBar() {
